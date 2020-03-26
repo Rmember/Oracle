@@ -19,9 +19,10 @@ SQL> select * from dba_direcories;
 SQL> grant read,write on directory data_dir to WMS_USER;
 
 6、“full=y”，全量导出数据库
-
+##不压缩不并行备份
 $ expdp WMS_USER@orcl dumpfile=expdp_$(date +"%Y%m%d").dmp directory=data_dir full=y logfile=expdp_$(date +"%Y%m%d").log
-
+##压缩并行备份
+$ expdp WMS_USER directory=data_dir dumpfile=expdp_$(date +"%Y%m%d").dmp logfile=expdp_$(date +"%Y%m%d").log compression=ALL parallel=4 full=y
 
 二、恢复
 
